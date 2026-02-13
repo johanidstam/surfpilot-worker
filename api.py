@@ -1,19 +1,15 @@
 from flask import Flask, jsonify
-import os
 import json
+import os
 
 app = Flask(__name__)
 
-DATA_FILE = "data.json"
-
-
-@app.route("/")
-def home():
-    return "API is running"
+DATA_FILE = "/data/data.json"
 
 
 @app.route("/data")
 def data():
+
     if not os.path.exists(DATA_FILE):
         return jsonify({"plans": []})
 
@@ -22,9 +18,7 @@ def data():
 
 
 if __name__ == "__main__":
-    import os
 
     port = int(os.environ.get("PORT", 8080))
 
     app.run(host="0.0.0.0", port=port)
-
