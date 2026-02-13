@@ -1,24 +1,28 @@
 from flask import Flask, jsonify
-import json
-import os
 
 app = Flask(__name__)
 
-DATA_FILE = "/data/data.json"
+
+@app.route("/")
+def home():
+    return "API is running"
 
 
 @app.route("/data")
 def data():
+    plans = [
+        {"operator": "Hallon", "gb": 100, "price": 115},
+        {"operator": "Vimla", "gb": 60, "price": 170},
+        {"operator": "Comviq", "gb": 50, "price": 185},
+        {"operator": "Fello", "gb": 50, "price": 265},
+        {"operator": "Telenor", "gb": 100, "price": 279},
+    ]
 
-    if not os.path.exists(DATA_FILE):
-        return jsonify({"plans": []})
-
-    with open(DATA_FILE) as f:
-        return jsonify(json.load(f))
+    return jsonify({"plans": plans})
 
 
 if __name__ == "__main__":
+    import os
 
     port = int(os.environ.get("PORT", 8080))
-
     app.run(host="0.0.0.0", port=port)
