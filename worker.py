@@ -1,5 +1,10 @@
 import json
 import time
+import os
+
+
+DATA_DIR = "/data"
+DATA_FILE = os.path.join(DATA_DIR, "data.json")
 
 
 def fetch_real_data():
@@ -12,27 +17,13 @@ def fetch_real_data():
     ]
 
 
-import os
-import json
-import time
-
-
 def save(plans):
 
-    os.makedirs("/data", exist_ok=True)
+    # Skapa /data om den inte finns
+    os.makedirs(DATA_DIR, exist_ok=True)
 
-    temp_file = "/data/data.tmp"
-    final_file = "/data/data.json"
-
-    # Skriv till temp först
-    with open(temp_file, "w") as f:
+    with open(DATA_FILE, "w") as f:
         json.dump({"plans": plans}, f, indent=2)
-
-    # Byt fil atomiskt
-    os.replace(temp_file, final_file)
-
-    print("Data saved safely")
-
 
 
 def main():
