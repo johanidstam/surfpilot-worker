@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 import json
 import os
 
+
 app = Flask(__name__)
 
 DATA_FILE = "/data/data.json"
@@ -13,18 +14,8 @@ def data():
     if not os.path.exists(DATA_FILE):
         return jsonify({"plans": []})
 
-    try:
-        with open(DATA_FILE) as f:
-            return jsonify(json.load(f))
-
-    except Exception as e:
-
-        print("Read error:", e)
-
-        return jsonify({
-            "plans": [],
-            "error": "Temporary read error"
-        })
+    with open(DATA_FILE) as f:
+        return jsonify(json.load(f))
 
 
 if __name__ == "__main__":
