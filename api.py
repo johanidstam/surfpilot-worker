@@ -13,8 +13,18 @@ def data():
     if not os.path.exists(DATA_FILE):
         return jsonify({"plans": []})
 
-    with open(DATA_FILE) as f:
-        return jsonify(json.load(f))
+    try:
+        with open(DATA_FILE) as f:
+            return jsonify(json.load(f))
+
+    except Exception as e:
+
+        print("Read error:", e)
+
+        return jsonify({
+            "plans": [],
+            "error": "Temporary read error"
+        })
 
 
 if __name__ == "__main__":
