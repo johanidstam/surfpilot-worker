@@ -13,7 +13,7 @@ def fetch_real_data():
 
 
 def save(plans):
-    with open("data/data.json", "w") as f:
+    with open("/data/data.json", "w") as f:
         json.dump({"plans": plans}, f, indent=2)
 
 
