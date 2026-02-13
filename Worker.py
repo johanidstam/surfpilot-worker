@@ -12,7 +12,7 @@ def fetch_data():
 
 
 def save(data):
-    with open("data.json", "w") as f:
+    with open("/data/data.json", "w") as f:
         json.dump({"raw": data}, f)
 
 
